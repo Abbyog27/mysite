@@ -83,12 +83,7 @@ print('-----MONGO_URI------')
 print(MONGO_URI)
 DATABASES = {
     'default': {
-        'ENGINE': 'django',
-        'NAME': 'mysite',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': MONGO_URI
-        }
+        
     }
 }
 

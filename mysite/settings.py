@@ -82,8 +82,9 @@ MONGO_URI = os.getenv('MONGO_URI')
 print('-----MONGO_URI------')
 print(MONGO_URI)
 DATABASES = {
-    'default': {
-        
+    'default': {        
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mysite',       
     }
 }
 

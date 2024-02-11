@@ -1,0 +1,13 @@
+li a {
+    color: green;
+}
+
+body {
+    background: white url("image/background.jpeg") no-repeat;
+}
+
+.icon {
+    padding-left: 25px;
+    background: url("image/background.jpeg") no-repeat left;
+    background-size: 20px;
+  }

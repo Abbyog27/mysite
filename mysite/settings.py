@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
 import dj_database_url
 import psycopg2
 
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,14 +85,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-MONGO_URI = os.getenv('MONGO_URI')
-print('-----MONGO_URI------')
-print(MONGO_URI)
+# MONGO_URI = os.getenv('MONGO_URI')
+# print('-----MONGO_URI------')
+# print(MONGO_URI)
 DATABASES = {
-    
+    # 'ENGINE': 'django.db.backends.postgresql',
+    # 'NAME': 'mysite',
 }
 DATABASES['default'] = dj_database_url.config(
-    default = os.getenv(DATABASE_URL)
+    default = os.getenv(DATABASE_URL),
     conn_max_age=600, 
     ssl_require=True)
 

@@ -13,27 +13,27 @@ from django.views import generic
 from django.utils import timezone
 
 
-client = MongoClient(os.getenv('MONGO_URI'))
-db = client['mysite']
-print(db.list_collection_names())
+# client = MongoClient(os.getenv('MONGO_URI'))
+# db = client['mysite']
+# print(db.list_collection_names())
 
 
-question_one = {
-    'question_text': 'What is your favorite color?',
-    'pub_date': datetime.now(),
-}
+# question_one = {
+#     'question_text': 'What is your favorite color?',
+#     'pub_date': datetime.now(),
+# }
 
-question_two = {
-    'question_text': 'What ORM do we use from MongoDB?',
-    'pub_date': datetime.now(),
-}
-db.polls_question.insert_one(question_one)
+# question_two = {
+#     'question_text': 'What ORM do we use from MongoDB?',
+#     'pub_date': datetime.now(),
+# }
+# db.polls_question.insert_one(question_one)
 
-db.polls_question.insert_one(question_two)
+# db.polls_question.insert_one(question_two)
 
 
-print(db.polls_question.find_one())
-# print('new polls question', db.polls_question.find_one({'_id'}))
+# print(db.polls_question.find_one())
+# # print('new polls question', db.polls_question.find_one({'_id'}))
 
 # #TODO Search by question_text
 # def search_question_by_text(question_text):

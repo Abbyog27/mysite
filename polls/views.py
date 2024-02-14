@@ -12,6 +12,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
+from .forms import ContactForm
+from django.core.mail import send_mail
 
 # client = MongoClient(os.getenv('MONGO_URI'))
 # db = client['mysite']
@@ -89,9 +91,20 @@ from django.utils import timezone
 # def results(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
 #     return render(request, "polls/results.html", {"question": question})
-def home(request):
-    return render(request, "mysite/home.html")
-
+def email(request):
+    if request.method =="POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            cc_myself = form.cleaned_data['cc_myself']
+            send_email(
+                subject,
+                message,
+                sender,
+                fail_silently=False)
+        return render(request, 'email.html')
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"

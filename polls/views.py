@@ -91,20 +91,25 @@ from django.core.mail import send_mail
 # def results(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
 #     return render(request, "polls/results.html", {"question": question})
-def email(request):
-    if request.method =="POST":
+def contact_form(request):
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            sender = form.cleaned_data['sender']
-            cc_myself = form.cleaned_data['cc_myself']
-            send_email(
-                subject,
-                message,
-                sender,
-                fail_silently=False)
-        return render(request, 'email.html')
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+            sender = form.cleaned_data["sender"]
+            cc_myself = form.cleaned_data["cc_myself"]
+
+            recipients = ["abbyog27@gmail.com"]
+            if cc_myself:
+                recipients.append(sender)
+
+            send_mail(subject, message, sender, recipients)
+            return HttpResponseRedirect("/thanks/")
+    else:
+        form = ContactForm()
+
+    return render(request, 'polls/contact.html', {'form': form})
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
